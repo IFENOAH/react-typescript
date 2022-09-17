@@ -1,11 +1,10 @@
-import { useRef } from "react"
+import { useRef, useContext } from "react"
+import { TodosContext } from "../store/todos-context"
 import styles from './NewTodo.module.css'
 
-interface INewTodo {
-    onAddTodo: (text: string) => void
-}
+const NewTodo = () => {
 
-const NewTodo = ({onAddTodo}:INewTodo) => {
+    const todoCtx = useContext(TodosContext)
 
     const todoInputRef = useRef<HTMLInputElement>(null)
 
@@ -18,7 +17,7 @@ const NewTodo = ({onAddTodo}:INewTodo) => {
             return;
         }
 
-        onAddTodo(entereredText)
+        todoCtx.addTodo(entereredText)
     }
 
     return <form onSubmit={submitHandler} className = {styles.form}>
